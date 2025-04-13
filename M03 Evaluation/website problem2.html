@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture on rent in Bengaluru</title>
+</head>
+<style>
+    div#firstsection>img{
+        width: 200px;
+        height: 25px;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    div#firstsection{
+        display: flex;
+        gap: 35px;
+        margin-top: 25px;
+    }
+    div.rooms{
+        display: grid;
+        grid-template-columns: repeat(8,1fr);
+        width: 70%;
+        margin: auto;
+    }
+    div.roomchild>img{
+        width: 100px;
+        height: 100px;
+    }
+    h1{
+        text-align: center;
+    }
+    div.scroll{
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
+    div.scroll>img{
+        width: 400px;
+        height: 250px;
+        border-radius: 20px;
+    }
+    div#newarrival{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        width: 80%;
+        margin: auto;
+    }
+    div#newarrival-one>img{
+        width: 100%;    
+
+    }
+    div#newarrival-one{
+        text-align: center;  
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    div#newarrival5{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        width: 80%;
+        margin: auto;
+    }
+    div#newarrival5>img{
+        width: 450px;
+        border-radius: 20px;
+    }
+    div#spotlight{
+        background-image: linear-gradient(to bottom,#6dbfb8,#fdee95,#4ebabd);
+
+    }
+    div#spot>img{
+        width: 300px;
+        height: 250px;
+        border-radius: 20px;
+    }
+    div#spot{
+        text-align: center;
+    }
+    div#spotlight-one{
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+    .main{
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 30px;
+        display: flex;
+    }div#thirdsection>img{
+        width: 35px;
+        height: 35px;
+    }
+    div#thirdsection{
+        gap: 20px;
+        display: flex;
+        justify-content: end;
+        margin-left: 50px;
+        margin-top: 20px;
+    }
+    div#secondsection>div{
+        height: 50px;
+        width: 300px;
+        margin-top: 15px;
+        margin-left: 400px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 30px;
+    }
+</style>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="main">
+                <div id="firstsection">
+                    <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/yoda/furlenco-logo.png" alt="logo">
+                    <!-- <i class="fi fi-ts-land-layer-location"></i> -->
+                    <p>Delivery</p>
+                    <p>Buy</p>
+                    <p>Rent</p>
+                    <p>UNLMTD</p>
+                </div>
+                <div id="secondsection">
+                    <div></div>
+                </div>
+                <div id="thirdsection">
+                    <img src="data:image/png;base64,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" alt="">
+                    <img src="data:image/png;base64,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" alt="">
+                    <img src="data:image/png;base64,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" alt="">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main section -->
+    <main>
+        <h1>RENT FURNITURE</h1>
+        <div class="rooms">
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+            <div class="roomchild">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/0/icon/bedroom_icon.png" alt="">
+                <p>Living room</p>
+            </div>
+        </div>
+        <br>
+        <div class="scroll">
+            <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/rcb_banner_rent_desktop2.png" alt="">
+            <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/rcb_banner_rent_desktop2.png" alt="">
+            <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/rcb_banner_rent_desktop2.png" alt="">
+        </div>
+        <br>
+        <br>
+        <br>
+        <div id="newarrival">
+            <div id="newarrival-one">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/6755/thumbnail/Furlenco%202.0-11596.jpg" alt="">
+                <h3>Haimish Engine</h3>
+                <p>Rent</p>
+                <p>849/-</p>
+            </div>
+            <div id="newarrival-one">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/6755/thumbnail/Furlenco%202.0-11596.jpg" alt="">
+                <h3>Haimish Engine</h3>
+                <p>Rent</p>
+                <p>849/-</p>
+            </div>
+            <div id="newarrival-one">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/6755/thumbnail/Furlenco%202.0-11596.jpg" alt="">
+                <h3>Haimish Engine</h3>
+                <p>Rent</p>
+                <p>849/-</p>
+            </div>
+            <div id="newarrival-one">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/6755/thumbnail/Furlenco%202.0-11596.jpg" alt="">
+                <h3>Haimish Engine</h3>
+                <p>Rent</p>
+                <p>849/-</p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div>
+            <img style="width: 80%;height: 300px; padding-left: 150px; border-radius:20px;" src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/rcb_slim_banner_entry.png" alt="">
+        </div>
+        <br>
+        <br>
+        <p style="font-family: 'Courier New', Courier, monospace; font-size: 30px;">Why rent from Furlenco?<p>
+        <div id="newarrival5">
+            <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/why_rent_carousel1_may5.jpg" alt="">
+            <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/why_rent_carousel1_may5.jpg" alt="">
+            <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/why_rent_carousel1_may5.jpg" alt="">
+        </div>
+        <br>
+        <br>
+        <div id="spotlight">
+            <p>In the</p>
+            <p style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 30px; font-style: italic;">Spotlight<p>
+                <div id="spotlight-one">
+                <div id="spot">
+                    <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/4071/thumbnail/Furlenco%202.0-6957_2.jpg" alt="">
+                    <p>Balance Engine...</p>
+                    <p>Rent</p>
+                    <p>489/-</p>
+                </div>
+                <div id="spot">
+                    <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/4071/thumbnail/Furlenco%202.0-6957_2.jpg" alt="">
+                    <p>Balance Engine...</p>
+                    <p>Rent</p>
+                    <p>489/-</p>
+                </div>
+                <div id="spot">
+                    <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/4071/thumbnail/Furlenco%202.0-6957_2.jpg" alt="">
+                    <p>Balance Engine...</p>
+                    <p>Rent</p>
+                    <p>489/-</p>
+                </div>
+                <div id="spot">
+                    <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/4071/thumbnail/Furlenco%202.0-6957_2.jpg" alt="">
+                    <p>Balance Engine...</p>
+                    <p>Rent</p>
+                    <p>489/-</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div>
+            <img style="width: 80%;height: 300px; padding-left: 150px; border-radius:20px;" src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/rcb_banner_unlmtd_slim.png" alt="">
+        </div>
+        <br>
+        <br>
+        <div id="newarrival5">
+            <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/rent_conviction2_may5.jpg" alt="">
+            <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/rent_conviction2_may5.jpg" alt="">
+        </div>
+        <br>
+        <br>
+        <br>
+        <p style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 30px;font-style: italic;">Ortho Mattresses</p>
+        <p style="font-size: 15px;">To RENT</p>
+        <div id="newarrival">
+            <div id="newarrival-one">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/6541/thumbnail/mattress_1.png" alt="">
+                <h3>Matrtress Premium(78*72)</h3>
+                <p>Rent</p>
+                <p style="font-weight: bold; font-size: 20px;">-34%</p>
+            </div>
+            <div id="newarrival-one">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/6541/thumbnail/mattress_1.png" alt="">
+                <h3>Matrtress Premium(78*72)</h3>
+                <p>Rent</p>
+                <p style="font-weight: bold; font-size: 20px;">-34%</p>
+            </div>
+            <div id="newarrival-one">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/6541/thumbnail/mattress_1.png" alt="">
+                <h3>Matrtress Premium(78*72)</h3>
+                <p>Rent</p>
+                <p style="font-weight: bold; font-size: 20px;">-34%</p>
+            </div>
+            <div id="newarrival-one">
+                <img src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/plutus/products/6541/thumbnail/mattress_1.png" alt="">
+                <h3>Matrtress Premium(78*72)</h3>
+                <p>Rent</p>
+                <p style="font-weight: bold; font-size: 20px;">-34%</p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <p style="font-family: 'Courier New', Courier, monospace; font-size: 30px;">Your furniture, your freedom</p>
+        <div>
+            <img style="width: 80%;height: 300px; padding-left: 150px; border-radius:20px;" src="https://assets.furlenco.com/image/upload/dpr_2.0,f_auto,q_auto/v1/s3-furlenco-images/evolve_2_0/why_rent_desktop_banner_may5.jpg" alt="">
+        </div>
+    </main>
+    <hr>
+    <footer>
+        <h4>CITIES WE DELIVER TO</h4>
+        <P>Bengaluru, Munbai, Pune, Gurugram, Noida, Hyderabad, Chennai, Ghaziabad, Fariabad, Jaippur, Mysuru, chandigarh, Vijayawada, Nashik, Sonipat, Patiala, Meerut, Panipat, Ambala, Karnal, Hosur, Kolkata, Ahmedabad, Coimbatore, Gandhinagar, Lucknow, Indore</P>
+        <br>
+        <br>
+        <hr>
+        <h2>Rent Online</h2>
+        <p>Looking to furnish your home but not sure Where to begin? Look no Further! With Furlenco, you can rent furniture and appliances of your choice, and furnish your space. </p>
+    </footer>
+</body>
+</html>
