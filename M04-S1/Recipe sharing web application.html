@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Sharing Web Application</title>
+</head>
+<style>
+    div#container{
+        display: grid;
+        gap: 15px;
+        grid-template-columns: repeat(2,1fr);
+    }
+    div#container>div{
+        width: 250px;
+        height: 250px;
+        border: 1px solid black;
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 15px;
+    }
+    p#title{
+        color: rgb(0, 255, 8);
+        font-weight: bold;
+        font-style: italic;
+    }
+    p#ingredient{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+        color: brown;
+    }
+    p#description{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: rgb(227, 234, 17);
+    }
+    p#catergorylabel{
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        color: blueviolet;
+    }
+</style>
+<body>
+    <label for="">Recipe Name:</label>
+    <input type="text" required id="recipename">
+    <label for="">Ingredients:</label>
+    <textarea name="" id="ingredients"></textarea>
+    <label for="">Preparation Steps:</label>
+    <input type="text" required id="preparation">
+    <label for="">Category</label>
+    <input type="text" id="catergory" required>
+    <button id="Submited">Submit</button>
+    <br>
+    <br>
+    <label for="">Select Category</label>
+    <select name="" id="select">
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+        <option value="dessert">Dessert</option>
+        <option value="drinks">Drinks</option>
+    </select>
+    <button id="catergoryselect">Select Category</button>
+    <div  id="container">
+
+    </div>
+    <label for="">Theme Select:</label>
+    <select name="" id="select-theme">
+        <option value="dark">dark</option>
+        <option value="light">light</option>
+    </select>
+    <button id="themeselect">Theme Select</button>
+    
+            
+</body>
+</html>
+<script>
+    let recipe=document.getElementById("recipename")
+    let ingredients=document.getElementById("ingredients")
+    let preparation=document.getElementById("preparation")
+    let catergory=document.getElementById("catergory")
+    let submit=document.getElementById("Submited")
+    submit.addEventListener("click",()=>{
+        let div=document.getElementById("container")
+        let recipedata=JSON.parse(localStorage.getItem(recipe.value))||[]
+        let data={RecipeName:recipe.value,Ingredients:ingredients.value,Preparation:preparation.value,catergory:catergory.value}
+        recipedata.push(data)
+        console.log(data)
+        localStorage.setItem(recipe.value,JSON.stringify(recipedata))
+        recipedata.forEach((ele)=>{
+            let div=document.getElementById("container");
+            let divfor=document.createElement("div")
+            divfor.innerHTML=`<p id="title">RecipeName: ${ele.RecipeName}</p>
+                                <p id="ingredient">Ingredients: ${ele.Ingredients}</p>
+                                <p id="description">Preparation: ${ele.Preparation}</p>
+                                <p id="catergorylabel">Category: ${ele.catergory}</p>`
+            div.append(divfor)
+        })
+    })
+    let select=document.getElementById("select").value;
+    let catergoryselect=document.getElementById("catergoryselect");
+    catergoryselect.addEventListener("click",()=>{
+        let recipedata=JSON.parse(localStorage.getItem(recipe.value))
+        console.log(recipedata)
+
+        
+    })
+    let themeselect=document.getElementById("themeselect");
+    themeselect.addEventListener("click",()=>{
+        let selectheme=document.getElementById("select-theme").value;
+        console.log(selectheme)
+        if(selectheme=="dark"){
+            document.body.style.backgroundColor="black"
+            document.body.style.color="white"
+        }
+        else{
+            document.body.style.backgroundColor="white";
+            document.body.style.color="black"
+        }
+    })
+
+</script>
