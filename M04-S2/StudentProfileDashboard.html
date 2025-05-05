@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-Profile-Dashboard</title>
+</head>
+<style>
+    body{
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #f4f4f4;
+        margin-top: 50px;
+    }
+    button,input,select{
+        padding: 5px;
+        margin: 10px;
+    }
+    #student-list{
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        text-align: center;
+    }
+    .student-child{
+        width: 300px;
+        border: 0.5px solid;
+        justify-content: center;
+    }
+    span{
+        font-weight: bold;
+    }
+    .edit-btn{
+        background-color: aqua;
+        border-radius: 4px;
+        padding: 6px;
+    }
+    .delete-btn{
+        background-color: rgb(244, 76, 76);
+        border-radius: 5px;
+        padding: 6px;
+    }
+    .delete-btn:hover{
+        background-color: red;
+        color: #f4f4f4;
+    }
+    .edit-btn:hover{
+        background-color: aquamarine;
+    }
+    .search-btn{
+        background-color: cornflowerblue;
+        padding: 6px;
+        border-radius: 5px;
+    }
+    .add-btn{
+        background-color: rgb(100, 237, 111);
+        padding: 6px;
+        border-radius: 5px;
+    }
+    .add-btn:hover{
+        background-color: rgb(219, 159, 159);
+        color: aliceblue;
+    }
+    .search-btn:hover{
+        background-color: rgb(66, 215, 212);
+        color: #333;
+    }
+
+</style>
+<body>
+    <input type="text" id="id" readonly>
+    <label for="">Enter Name: </label>
+    <input type="text" placeholder="Enter Name" id="name">
+    <label for="">Enter Age: </label>
+    <input type="number" placeholder="Enter Age" id="age">
+    <label for="">Enter Name: </label>
+    <input type="email" placeholder="Enter Email" id="email">
+    <label for="">Enter Course: </label>
+    <input type="text" id="course" placeholder="Enter Course">
+    <label for="">Enter Gender</label>
+    <input type="text" name="" id="gender">
+    <label for="">Enter Skills</label>
+    <input type="text" name="" id="skills">
+    <button class="add-btn" onclick="addOrUpdateStudent()">Save Student</button>
+    <br>
+    <select name="" id="course-select">
+        <option value="ssc">SSC</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="degree">Degree</option>
+    </select>
+    <input type="text" id="image" placeholder="Image-URL">
+    <fieldset>
+            <input type="radio" id="gender-male" value="Male">
+            <label for="gender-male">Male</label>
+            <input type="radio" name="" id="gender-female" value="Female">
+            <label for="gender-female">Female</label>
+    </fieldset>
+    <div>
+        <input type="checkbox" id="skills">
+        <label for="">Communication</label>
+    </div>
+    <label for="">Student Search</label>
+    <input type="text" id="search-name" placeholder="Search Student">
+    <button class="search-btn" onclick="filterAndSortStudent()">Search</button>
+
+    <select name="" id="theme">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+    </select>
+    <button onclick="changeTheme()">Theme Change</button>
+    <div id="student-list"></div>
+</body>
+</html>
+<script>
+    function changeTheme(){
+        
+        let selectTheme=document.getElementById("theme").value;
+        if(selectTheme=="dark"){
+            document.body.style.backgroundColor="#333"
+            document.body.style.color="white";
+        }
+        else{
+            document.body.style.backgroundColor="#fff"
+            document.body.style.color="#333"
+
+        }
+    }
+
+
+
+    let baseusrlstudent="https://student-profile-dashboar-dc534-default-rtdb.asia-southeast1.firebasedatabase.app/students"
+    async function fetchStudents(){
+        let res=await fetch(`${baseusrlstudent}.json`)
+        let data=await res.json()
+        if(!data) return []
+        return Object.entries(data).map(([id,student])=>({id,...student}))
+    }
+    async function filterAndSortStudent(){
+        let students=await fetchStudents()
+        let searchedStudent=document.getElementById("search-name").value;
+        let filtered=students.filter((student)=>{
+            return ((searchedStudent=="" || student.name==searchedStudent))
+        })
+        filtered.sort((a,b)=>{
+            return a.name.localeCompare(b.name)
+        })
+        displayStudent(filtered)
+    }
+    function displayStudent(students){
+        let studentList=document.getElementById("student-list")
+        studentList.innerHTML=""
+        students.forEach((student)=>{
+            let studentChild=document.createElement("div");
+            studentChild.className="student-child";
+            studentChild.innerHTML=`
+            <p><span>Name: </span>${student.name}</p>
+            <p><span>Age: </span>${student.age}</p>
+            <p><span>Email: </span>${student.email}</p>
+            <p><span>Course: </span>${student.course}</p>
+            <p><span>Gender: </span>${student.gender}</p>
+            <p><span>Skills: </span>${student.skills}</p>
+            <button class="edit-btn" onclick="editStudent('${student.id}','${student.name}','${student.age}','${student.email}','${student.course}','${student.gender}','${student.skills}')">Edit</button>
+            <button class="delete-btn" onclick="deleteStudent('${student.id}')">Delete</button>`
+            studentList.appendChild(studentChild)
+        })
+
+    }
+    function editStudent(id,name,age,email,course,gender,skills){
+        document.getElementById("id").value=id;
+        document.getElementById("name").value=name;
+        document.getElementById("age").value=age;
+        document.getElementById("email").value=email;
+        document.getElementById("course").value=course;
+        document.getElementById("gender").value=gender;
+        document.getElementById("skills").value=skills;
+
+    }
+    async function addOrUpdateStudent(){
+        let studentId=document.getElementById("id").value;
+        let student={
+            name:document.getElementById("name").value,
+            age:document.getElementById("age").value,
+            email:document.getElementById("email").value,
+            course:document.getElementById("course").value,
+            gender:document.getElementById("gender").value,
+            skills:document.getElementById("skills").value,
+        }
+        if(studentId){
+            await fetch(`${baseusrlstudent}/${studentId}.json`,{
+                method:"PATCH",
+                headers:{"Content-Type":'application/json'},
+                body:JSON.stringify(student)
+            })
+        }
+        else{
+            await fetch(`${baseusrlstudent}.json`,{
+                method:"POST",
+                headers:{"Content-Type":'application/json'},
+                body:JSON.stringify(student)
+            })
+        }
+        document.getElementById("name").value=""
+        document.getElementById("age").value=""
+        document.getElementById("email").value=""
+        document.getElementById("course").value=""
+        document.getElementById("gender").value=""
+        document.getElementById("skills").value=""
+        filterAndSortStudent()
+        
+    }
+    async function deleteStudent(studentId){
+        await fetch(`${baseusrlstudent}/${studentId}.json`,{
+            method:"DELETE"
+        })
+        filterAndSortStudent()
+    }
+    filterAndSortStudent()
+</script>
