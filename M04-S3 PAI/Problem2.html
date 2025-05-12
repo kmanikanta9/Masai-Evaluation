@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+
+    }
+    #div-list{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 15px;
+    }
+    #div-list>div{
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        background-color: aliceblue;
+        width: 300px;
+        margin-left: 25px;
+
+    }
+    img{
+        width: 250px;
+        height: 250px;
+    }
+    select ,input,button{
+        padding: 7px;
+        margin-top: 100px;
+        margin-left: 10px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+    }
+    span{
+        font-weight: bold;
+    }
+    button{
+        background-color: aqua;
+        border: none;
+        border-radius: 6px;
+        padding: 10px;
+    }
+</style>
+<body>
+    <label for="">Select Price Type: </label>
+    <select name="" id="select-input" onchange="searchProduct()">
+        <option value="asc">Low Price</option>
+        <option value="desc">High Price</option>
+        <option value="rating">Best Rating</option>
+    </select>
+    <label for="">Search Title: </label>
+    <input type="text" placeholder="Enter Title" id="search-input">
+    <button onclick="searchProduct()">Search</button>
+    <div id="div-list"></div>
+    
+</body>
+</html>
+<script>
+    async function fetchProducts(){
+        let res=await fetch("https://fakestoreapi.com/products")
+        let data=await res.json()
+        return data
+    }
+    async function searchProduct(){
+        let products=await fetchProducts();
+        console.log(products)
+        let searchInput=document.getElementById("search-input").value;
+        let selectInput=document.getElementById("select-input").value;
+        let search=products.filter((product)=>{
+            return (searchInput=="" || product.title==searchInput)
+            
+        })
+        console.log(search)
+        search.sort((a,b)=>{
+            if(selectInput=="asc") return a.price-b.price
+            if(selectInput=="desc") return b.price-a.price
+            if(selectInput=="rating") return b.rating.rate-a.rating.rate
+        })
+        displayProduct(search)
+
+    }
+    function displayProduct(product){
+        let div=document.getElementById("div-list")
+        div.innerHTML=""
+        product.forEach((product)=>{
+            let child=document.createElement("div")
+            child.innerHTML=`
+            <img src="${product.image}" alt="">
+            <p><span>Title: </span>${product.title}</p>
+            <p><span>Price: </span>${product.price}</p>
+            <p><span>Rating: </span>${product.rating.rate}</p>`
+            div.appendChild(child)
+
+        })
+    }
+    searchProduct()
+    // https://fakestoreapi.com/products
+</script>
